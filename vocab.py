@@ -26,7 +26,7 @@ class Vocab:
         vocab = Counter()
         
         for text in df['text']:
-            vocab.update([token.text for token in self.nlp(text.lower())])
+            vocab.update([token.text for token in self.nlp(text.lower()) if not token.is_punct])
 
         words = self.special_tokens + [word for word, freq in vocab.items() if freq >= self.min_freq]
         words = words[:self.max_words]

@@ -5,8 +5,8 @@ data_file = 'data/full.zip'
 train_file = 'data/train.gz'
 val_file = 'data/val.gz'
 
-train_tkn_file = 'data/train.tkn'
-val_tkn_file = 'data/val.tkn'
+train_tkn_file = 'data/train.tkn.gz'
+val_tkn_file = 'data/val.tkn.gz'
 
 train_ngrams_file = 'data/train.ngrams.gz'
 val_ngrams_file = 'data/val.ngrams.gz'

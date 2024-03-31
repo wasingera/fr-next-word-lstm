@@ -41,10 +41,10 @@ def tokenize_data(file, vocab, out_file):
     nlp = spacy.blank('fr')
     df = pd.read_csv(file)
 
-    with open(out_file, 'w') as f:
+    with gzip.open(out_file, 'wt') as f:
         f.write('text\n')
         for text in df['text']:
-            tokens = [token.text for token in nlp(text.lower())]
+            tokens = [token.text for token in nlp(text.lower()) if not token.is_punct]
             tokens = [vocab[token] for token in tokens]
             tokens = ' '.join(map(str, tokens))
             f.write(f'{tokens}\n')
@@ -58,7 +58,7 @@ def create_ngrams(f_in, f_out, n):
 
     print(f"Creating {n}-grams...")
 
-    with open(f_in, 'r') as f, gzip.open(f_out, 'wt') as out:
+    with gzip.open(f_in, 'rt') as f, gzip.open(f_out, 'wt') as out:
         out.write('text\n')
         next(f)
         for line in f:
