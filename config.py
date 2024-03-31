@@ -8,8 +8,8 @@ val_file = 'data/val.gz'
 train_tkn_file = 'data/train.tkn.gz'
 val_tkn_file = 'data/val.tkn.gz'
 
-train_ngrams_file = 'data/train.ngrams.gz'
-val_ngrams_file = 'data/val.ngrams.gz'
+train_contexts_file = 'data/train.contexts.gz'
+val_contexts_file = 'data/val.contexts.gz'
 
 vocab_file = 'data/vocab.pkl'
 special_tokens = ['[PAD]', '[UNK]', '[START]', '[END]']
@@ -17,7 +17,7 @@ unk_token = '[UNK]'
 pad_idx = 0
 max_words = 10000
 min_freq = 5
-ngram_size = 5
+context_size = 10
 
 ## Training
 batch_size = 1024

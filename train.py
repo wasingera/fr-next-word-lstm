@@ -86,11 +86,11 @@ def train_model(train_loader, val_loader, model, loss_fn, optimizer, curr_epoch,
     print("Done!")
 
 if __name__ == '__main__':
-    train_dataset = TweetDataset(config.train_ngrams_file)
-    val_dataset = TweetDataset(config.val_ngrams_file)
+    train_dataset = TweetDataset(config.train_contexts_file)
+    val_dataset = TweetDataset(config.val_contexts_file)
 
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_fn)
-    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, collate_fn=collate_fn)
+    train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True, collate_fn=collate_fn)
+    val_loader = DataLoader(val_dataset, batch_size=config.batch_size, shuffle=False, collate_fn=collate_fn)
 
     vocab = Vocab()
     vocab.load(config.vocab_file)

@@ -51,24 +51,24 @@ def tokenize_data(file, vocab, out_file):
 
     print("Tokenized data saved to", out_file)
 
-def create_ngrams(f_in, f_out, n):
+def create_contexts(f_in, f_out, n):
     if os.path.exists(f_out):
-        print(f'Found {f_out}, skipping ngram creation...')
+        print(f'Found {f_out}, skipping context creation...')
         return
 
-    print(f"Creating {n}-grams...")
+    print(f"Creating contexts...")
 
     with gzip.open(f_in, 'rt') as f, gzip.open(f_out, 'wt') as out:
         out.write('text\n')
         next(f)
         for line in f:
             tokens = line.strip().split()
-            ngrams = [tokens[i:i+n] for i in range(len(tokens)-n+1)]
-            ngrams = [' '.join(ng) for ng in ngrams]
-            ngrams = '\n'.join(ngrams)
-            out.write(f'{ngrams}\n')
+            context = [tokens[i:i+n] for i in range(len(tokens)-n+1)]
+            context = [' '.join(con) for con in context]
+            context = '\n'.join(context)
+            out.write(f'{context}\n')
 
-    print(f"{n}-grams saved to", f_out)
+    print(f"Contexts saved to", f_out)
 
 if __name__ == '__main__':
     split_data(config.data_file, config.train_file, config.val_file, 0.8)
@@ -77,5 +77,5 @@ if __name__ == '__main__':
     tokenize_data(config.train_file, vocab, config.train_tkn_file)
     tokenize_data(config.val_file, vocab, config.val_tkn_file)
 
-    create_ngrams(config.train_tkn_file, config.train_ngrams_file, config.ngram_size)
-    create_ngrams(config.val_tkn_file, config.val_ngrams_file, config.ngram_size)
+    create_contexts(config.train_tkn_file, config.train_contexts_file, config.context_size)
+    create_contexts(config.val_tkn_file, config.val_contexts_file, config.context_size)

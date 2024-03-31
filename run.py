@@ -1,4 +1,4 @@
-import torch
+import torch, sys
 
 import config
 from model import FrenchSentimentAnalysis
@@ -22,10 +22,17 @@ def predict_next_word(text, model, vocab):
         predicted_prob = torch.softmax(output, dim=1).squeeze()[prediction].item()
         return predicted_word, predicted_prob
 
-text = "Il"
-for i in range(0, 50):
-    word, prob = predict_next_word(text, model, vocab)
-    # print(f"Predicted next word: {word}")
-    # print(f"Confidence: {100*prob:.2f}%")
-    text += " " + word
-print(text)
+# text = "Il"
+# for i in range(0, 50):
+#     word, prob = predict_next_word(text, model, vocab)
+#     # print(f"Predicted next word: {word}")
+#     # print(f"Confidence: {100*prob:.2f}%")
+#     text += " " + word
+# print(text)
+
+if __name__ == '__main__':
+    input = sys.argv[1]
+    for i in range(0, 50):
+        word, prob = predict_next_word(input, model, vocab)
+        input += " " + word
+    print(input)
